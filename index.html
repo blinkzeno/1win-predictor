@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1Win Mines Predictor AI</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mines AI">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/1022/1022313.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -13,6 +22,7 @@
           background-color: #0a0f1e; 
           color: #f8fafc;
           overflow-x: hidden;
+          -webkit-tap-highlight-color: transparent;
         }
         
         .custom-scrollbar::-webkit-scrollbar {
@@ -67,5 +77,15 @@
 </head>
 <body>
     <div id="root"></div>
+    <script>
+      // Service Worker Registration for PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('Service Worker enregistré !', reg))
+            .catch(err => console.log('Erreur SW:', err));
+        });
+      }
+    </script>
 </body>
 </html>

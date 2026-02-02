@@ -1,0 +1,24 @@
+
+{
+  "name": "1Win Mines Predictor AI",
+  "short_name": "Mines AI",
+  "description": "Analyseur tactique et prédicteur IA pour le jeu Mines.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0f1e",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1022/1022313.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1022/1022313.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

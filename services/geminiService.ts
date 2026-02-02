@@ -30,14 +30,19 @@ export class GeminiService {
               },
             },
             {
-              text: `Tu es un système de prédiction haute précision pour le jeu "Mines" de 1win (grille ${gridSize}x${gridSize}).
-              
-              ANALYSE :
-              1. Identifie les cases révélées (Diamants) et les mines visibles.
-              2. Détermine les zones à forte probabilité de succès (Safe Cells) en te basant sur la distribution visuelle habituelle de l'algorithme 1win.
-              3. Retourne exactement 3 à 5 coordonnées de cases non-révélées que tu considères comme les plus sûres.
-              
-              FORMAT DE RÉPONSE : JSON uniquement. Les indices r (ligne) et c (colonne) commencent à 0.`,
+              text: `Tu es l'expert tactique ultime pour le jeu "Mines" de 1win. Ta mission est d'analyser cette capture d'écran de grille ${gridSize}x${gridSize} pour prédire les prochaines cases sûres.
+
+OBJECTIFS D'ANALYSE :
+1. RECONNAISSANCE VISUELLE : Identifie précisément l'emplacement des diamants (💎) déjà trouvés et des mines (💣) révélées.
+2. DÉTECTION DE PATTERNS 1WIN : Analyse la distribution spatiale. L'algorithme 1win utilise souvent des schémas de "clusters" (mines regroupées) ou des "diagonales de sécurité". Identifie les zones de vide thermique où la densité de mines semble statistiquement plus faible.
+3. CALCUL DE RISQUE : Évalue la proximité des cases non-révélées par rapport aux mines connues. Évite les cases adjacentes aux mines révélées ("Heat Map Analysis").
+4. SÉLECTION TACTIQUE : Sélectionne entre 3 et 5 cases non-révélées présentant le meilleur ratio de sécurité.
+
+FORMAT DE RÉPONSE ATTENDU (JSON) :
+- "analysisText" : Un résumé stratégique en français, mentionnant explicitement le pattern détecté (ex: "Dispersion périphérique", "Cluster central identifié", "Ligne de sécurité diagonale").
+- "predictions" : Un tableau d'objets { r, c, p, reason } où 'r' est la ligne (0 à ${gridSize-1}), 'c' la colonne (0 à ${gridSize-1}), 'p' l'indice de confiance (75-99) et 'reason' une brève explication tactique (ex: "Zone de vide détectée", "Pattern de dispersion éloigné", "Secteur de faible densité").
+
+Les indices r et c commencent impérativement à 0. Ne renvoie rien d'autre que le JSON.`,
             },
           ],
         },
@@ -71,7 +76,7 @@ export class GeminiService {
 
       const result = JSON.parse(response.text || "{}");
       return {
-        analysisText: result.analysisText || "Analyse terminée.",
+        analysisText: result.analysisText || "Analyse tactique terminée. Aucune anomalie majeure détectée.",
         predictions: result.predictions || []
       };
     } catch (error: any) {

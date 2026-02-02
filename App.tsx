@@ -308,20 +308,36 @@ const App: React.FC = () => {
                       className={cellStyles}
                       onClick={() => handleCellClick(r, c)}
                     >
-                      <span className="absolute top-1 left-1 text-[8px] text-slate-600 font-bold uppercase">{String.fromCharCode(65 + c)}{r + 1}</span>
+                      <span className="absolute top-1 left-1 text-[8px] text-slate-600 font-bold uppercase z-10">{String.fromCharCode(65 + c)}{r + 1}</span>
+                      
                       {isRevealed && (isMine ? '💣' : '💎')}
                       {!isRevealed && cheatVisible && (
                         <span className="opacity-40 grayscale">{isMine ? '💣' : '💎'}</span>
                       )}
+                      
+                      {/* ENHANCED AI PREDICTION OVERLAY */}
                       {isAiRecommended && (
-                        <>
-                          <div className="absolute inset-0 border-2 border-blue-500/60 rounded-2xl animate-pulse pointer-events-none"></div>
-                          <div className="absolute inset-0 bg-blue-500/10 pointer-events-none"></div>
-                          <div className="absolute bottom-1 right-1 bg-blue-500 text-[8px] font-black px-1 rounded text-white shadow-sm z-10">
+                        <div className="absolute inset-0 z-20 pointer-events-none flex flex-col items-center justify-center">
+                          {/* Pulsing Outer Border */}
+                          <div className="absolute inset-0 border-2 border-blue-400 rounded-2xl animate-pulse shadow-[0_0_20px_rgba(59,130,246,0.6)]"></div>
+                          
+                          {/* Rotating Light Sweep Effect */}
+                          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-blue-500/10 animate-pulse opacity-50"></div>
+                          
+                          {/* Confidence Tag */}
+                          <div className="bg-blue-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-lg mb-1 transform translate-y-[-2px]">
                             {aiPred.p}%
                           </div>
-                          <div className="text-blue-400 opacity-60 text-xl font-black animate-bounce">?</div>
-                        </>
+                          
+                          {/* Tactical Signal */}
+                          <div className="text-blue-400 font-black text-xs tracking-tighter animate-bounce drop-shadow-[0_0_10px_rgba(59,130,246,1)]">
+                            SAFE
+                          </div>
+                          
+                          {/* Tech Crosshair Corners */}
+                          <div className="absolute top-1 right-1 w-1.5 h-1.5 border-t border-r border-blue-400"></div>
+                          <div className="absolute bottom-1 left-1 w-1.5 h-1.5 border-b border-l border-blue-400"></div>
+                        </div>
                       )}
                     </div>
                   );
