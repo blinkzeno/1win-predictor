@@ -1,0 +1,7 @@
+{
+  "name": "1Win Mines Predictor AI",
+  "description": "An advanced tool for analyzing and predicting safe moves in 1win Mines game using probabilistic modeling and Gemini AI vision analysis.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
